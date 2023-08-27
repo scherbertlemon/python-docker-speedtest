@@ -1,0 +1,15 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "python-poetry",
+	"image": "python-poetry:latest",
+	"build": {
+		"context": "..",
+		"dockerfile": "../Dockerfile"
+	},
+	"workspaceFolder": "/project",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/project,type=bind",
+	"customizations": {"vscode": {"extensions": ["ms-python.python", "ms-toolsai.jupyter"]}},
+	"runArgs": ["--name=python-poetry"],
+	"containerEnv": {"PYTHONPATH": "/project/src"}
+}
