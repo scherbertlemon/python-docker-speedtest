@@ -40,3 +40,28 @@ From the root of this repository, run
 docker build -t python-poetry:amd64 --platform linux/amd64 -f build_push_base_images/Dockerfile --target environment .
 docker build -t python-poetry:arm64 --platform linux/arm64/v8 -f build_push_base_images/Dockerfile --target environment .
 ```
+
+## Usage
+
+This project contains a simple script that runs some matrix multiplications with ``numpy.matmul``. If you have built either of the above images, it can be run from the command line:
+
+```bash
+$ docker run --rm -it python-poetry:amd64 run-matmul --help
+usage: run-matmul [-h] [-n N] [-s S]
+
+cli script to run some matrix multiplications of square matrices with a given size and random numbers
+
+options:
+  -h, --help  show this help message and exit
+  -n N        amount of matrix multiplications to do
+  -s S        size of the matrices to multiply (s x s)
+```
+
+To run some comparisons, try on a Mac with M1
+
+```bash
+docker run --rm -it python-poetry:arm64 run-matmul -n 10 -s 1000
+docker run --rm -it python-poetry:amd64 run-matmul -n 10 -s 1000
+```
+
+and compare the time that is printed.
